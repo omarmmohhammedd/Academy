@@ -1,0 +1,9 @@
+http://localhost:3500/userAuth/reg/:type for Register User :
+Json => {email, name,phone,gender,password}
+status : 201
+response : { name, email,  phone,  gender }
+
+http://localhost:3500/userAuth/login For User Login:
+Json=>{"phone","password"},
+status:200,
+response => {name,email,phone,roles,token}
