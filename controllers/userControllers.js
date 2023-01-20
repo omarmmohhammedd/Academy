@@ -12,7 +12,7 @@ const Login = async (req, res) => {
             const isMatch = await bcrypt.compare(password, foundUser.password)
             if (isMatch) {
                 const token = jwt.sign({ "email": foundUser.email, "roles": foundUser.roles, "username": foundUser.username, "phone": foundUser.phone, "gender": foundUser.gender }, process.env.ACCESS_TOKEN, { expiresIn: "24h" })
-                res.json( { "username": foundUser.username, "roles": foundUser.roles,"phone": foundUser.phone ,token,"email":foundUser.email , "gender": foundUser.gender } ).status(200)
+                res.json( { "username": foundUser.username, "roles": foundUser.roles,"phone": foundUser.phone ,"token" : token,"email":foundUser.email , "gender": foundUser.gender } ).status(200)
             }
             else {
                 res.status(403).json({ "message": "Password Not Match" })

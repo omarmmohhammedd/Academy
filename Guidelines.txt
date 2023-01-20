@@ -1,9 +1,41 @@
-http://localhost:3500/userAuth/reg/:type for Register User :
-Json => {email, name,phone,gender,password}
+http://localhost:8000/userAuth/reg/:type for Register User :
+params => type 
+Json => {email, username,phone,gender,password}
 status : 201
-response : { name, email,  phone,  gender }
+response : { username, email,  phone,  gender }
+method => POST
 
-http://localhost:3500/userAuth/login For User Login:
+
+http://localhost:8000/userAuth/login For User Login:
 Json=>{"phone","password"},
 status:200,
-response => {name,email,phone,roles,token}
+response => {username,email,phone,roles,token}
+method => POST
+
+
+http://localhost:8000/userAuth/addInfo/:type For Add Info For User :
+method => POST
+params=> type
+for students json => { user_id, academic_year, academic_department }
+for teacher json => { user_id, department }
+
+
+http://localhost:8000/courses for GetAllCourses :
+method => GET
+
+http://localhost:8000/courses/:courseId for get course:
+method=>GET
+params => courseId
+
+http://localhost:8000/courses for Add Course:
+method=>POST
+json=> { course_name, course_time, course_department, price } ,
+status:201
+
+http://localhost:8000/courses/:courseId for Update Course:
+method => PUT
+json=> { course_name, course_time, course_department, price } ,
+
+http://localhost:8000/courses/:courseId for Delete Course:
+method => delete
+status=>200
