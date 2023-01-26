@@ -1,41 +1,96 @@
-http://localhost:8000/userAuth/reg/:type for Register User :
-params => type 
+http://localhost:8000/user/reg/:type for Register User :
+params => type = student || teacher || parent || admin
 Json => {email, username,phone,gender,password}
 status : 201
 response : { username, email,  phone,  gender }
 method => POST
 
 
-http://localhost:8000/userAuth/login For User Login:
+http://localhost:8000/user/login/:type For User Login:
+params => type 
 Json=>{"phone","password"},
 status:200,
 response => {username,email,phone,roles,token}
 method => POST
 
 
-http://localhost:8000/userAuth/addInfo/:type For Add Info For User :
-method => POST
+http://localhost:8000/user/addInfo/:type For Add Info For User :
 params=> type
-for students json => { user_id, academic_year, academic_department }
-for teacher json => { user_id, department }
+method => POST
+for students json => { student_id, academic_year, academic_department }
+for teacher json => { teacher_id, department }
+for parent json => {student_email}
 
 
-http://localhost:8000/courses for GetAllCourses :
+http://localhost:8000/user/courses for GetAllCourses :
 method => GET
+header : authorization
 
-http://localhost:8000/courses/:courseId for get course:
+http://localhost:8000/user/courses/:courseId for get course:
 method=>GET
+header : authorization
 params => courseId
 
-http://localhost:8000/courses for Add Course:
-method=>POST
-json=> { course_name, course_time, course_department, price } ,
+http://localhost:8000/admin/addCourse for Add Course:
+method => POST 
+json => { course_name, course_time, course_department, course_price } 
+status => 200
+
+http://localhost:8000/admin/updateCourse/:course_id for Update Course:
+method => PUT
+params = course_id
+json=> { course_name, course_time, course_department, price } 
+
+
+http://localhost:8000/admin/deleteCourse/:course_id from Delete  Course:
+
+method => DELETE
+status=>200 
+params => {course_id}
+
+
+http://localhost:8000/admin/attendance/:course_id  for Get Course attendance:
+
+method=>GET
+params => course_id 
 status:201
 
-http://localhost:8000/courses/:courseId for Update Course:
-method => PUT
-json=> { course_name, course_time, course_department, price } ,
 
-http://localhost:8000/courses/:courseId for Delete Course:
+http://localhost:8000/student/:student_id for get Student Courses:
+method => GET
+params => student_id
+
+
+http://localhost:8000/student/addCourse for Add Course To Student:
+method => POST
+json => {student_id, course_id }
+status=>201
+
+
+http://localhost:8000/student/deleteCourse for Delete Course From Student Courses:
 method => delete
+json => {student_id, course_id }
 status=>200
+
+http://localhost:8000/student/attendance/:student_id/:course_id for Add attendance To Student in Course:
+
+method => POST
+params => {student_id, course_id }
+
+
+http://localhost:8000/parent/AddParent/:parent_id for Add Parent To Student :
+
+method => POST
+params => {parent_id}
+json => {OTP,student_email}
+
+
+http://localhost:8000/parent/:parent_id for Get Students Detials Belong To This Parent :
+
+method => GET
+params => {parent_id}
+
+
+
+
+
